@@ -2,7 +2,7 @@
 
 function EstatCaldera() {
     // Executes the Python script to get the boiler status
-    $estatCaldera = trim(shell_exec("/home/joan/venv3.10/bin/python ../code/pyt/estatCaldera.py")); 
+    $estatCaldera = trim(shell_exec("sudo /home/joan/venv3.10/bin/python ../code/pyt/estatCaldera.py")); 
     return $estatCaldera; // Return the value instead of echoing
 }
 
@@ -15,7 +15,7 @@ function ControlCaldera() {
     } elseif ($estatCaldera === "OFF") {
 	// Only execute encendreCaldera.py if it's off
 	$output = "<p>Running in real mode.</p>";
-        $scriptOutput = shell_exec("/home/joan/venv3.10/bin/python ../code/pyt/encendreCaldera.py");
+        $scriptOutput = shell_exec("sudo /home/joan/venv3.10/bin/python ../code/pyt/encendreCaldera.py");
         $output .= $scriptOutput ? "<p>" . htmlspecialchars($scriptOutput) . "</p>" : "Error al encendre la caldera";
 	return $output;
     }
@@ -24,7 +24,7 @@ function ControlCaldera() {
     // be an error, not ON or OFF
     else {
 	$output = "<p>Running in test mode.</p>";
-        $scriptOutput = shell_exec("/home/joan/venv3.10/bin/python ../code/pyt/encendreCaldera.py");
+        $scriptOutput = shell_exec("sudo /home/joan/venv3.10/bin/python ../code/pyt/encendreCaldera.py");
 	$output .= $scriptOutput ? "<p>" .htmlspecialchars($scriptOutput) . "</p>" : "Error al encendre la caldera";
 	return $output;
     }
